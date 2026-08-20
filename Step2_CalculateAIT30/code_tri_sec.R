@@ -84,7 +84,7 @@ for (patient in patients){
     
     ##We will calculate AI at the second-level
     ##var_x, var_y, var_z: variance for x, y, and z measurements for the given second
-    ##samples_in_sec: number of recordings within the minute
+    ##samples_in_sec: number of recordings within the second
     temp <- data %>% group_by(date, hour, minute, second) %>% 
       summarise(var_x = var(x), var_y = var(y), var_z = var(z), samples_in_sec = n(),
                 .groups = "drop")
@@ -98,7 +98,7 @@ for (patient in patients){
     #hist(temp$samples_in_sec)
     
     ##Average second-level AI's within the minute (AI)
-    ##Count the number of recordings within the minute (samples_in_sec)
+    ##Count the number of recordings within the minute (samples)
     temp2 <- temp %>% group_by(date, hour, minute) %>%
       summarise(AI = mean(AIsec), samples = sum(samples_in_sec), .groups = "drop")
     temp2 <- as.data.frame(temp2)
